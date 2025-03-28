@@ -1,3 +1,122 @@
 .home {
   overflow-x: hidden;
 }
+
+.experienceSection {
+  /* Slight margin, centered layout, fade-in effect from your existing intersection observer */
+  max-width: 800px;
+  /* Controls how wide the section can be */
+  margin: 2rem auto;
+  /* Centers it horizontally */
+  transition: opacity 1s ease;
+  /* Keep the text color consistent with your site’s theme */
+  color: var(--black);
+}
+
+
+.experienceHeading {
+  font-size: var(--fontSizeH3);
+  /* Or another heading size variable you use */
+  margin-bottom: var(--spaceL);
+  color: var(--textTitle);
+}
+
+/* Each card */
+.experienceItem {
+  background-color: var(--textTitle);
+  /* E.g., #3e005c if that’s your dark purple */
+  margin-bottom: var(--spaceM);
+  border-radius: var(--borderRadius, 8px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Left side for the logo + title */
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--spaceS);
+}
+
+/* Right side for date + expand icon */
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spaceS);
+}
+
+.experienceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spaceM);
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Make the logo smaller */
+.certificateLogo {
+  width: 25px;
+  /* or 24px if you want slightly bigger */
+  height: auto;
+  object-fit: contain;
+}
+
+
+/* The link style for "Certificate Link" */
+.certificateLink {
+  color: var(--accent, #ffd700);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Smaller, centered certificate image */
+.certificateImageWrapper {
+  margin: var(--spaceS) auto 0;
+  /* auto left/right centers the wrapper */
+  max-width: 300px;
+  /* half the size of your old 400px */
+  text-align: center;
+  /* ensures content is centered horizontally */
+}
+
+.certificateImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--cyan);
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.experienceDetails {
+  background-color: var(--primary);
+  /* E.g., #4b0071 if that’s your mid-purple */
+  padding: var(--spaceM);
+  border-radius: 0 0 var(--borderRadius, 8px) var(--borderRadius, 8px);
+  clip-path: none;
+}
+
+/* Tag list styling */
+.experienceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spaceXS, 0.5rem);
+  margin-top: var(--spaceS, 0.5rem);
+}
+
+.experienceTag {
+  background-color: var(--textTitle);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* Responsive tweaks if desired */
+@media (max-width: 600px) {
+  .experienceSection {
+    margin: 1rem auto;
+    padding: 0 1rem;
+    /* some side padding for small screens */
+  }
+}

@@ -1,25 +1,24 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
-import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
+import React, { useEffect, useRef, useState } from 'react';
+import gamestackTexture2Large from '~/assets/FormFixer_home.jpg';
+import gamestackTexture2Placeholder from '~/assets/FormFixer_home.jpg';
+import gamestackTexture2 from '~/assets/FormFixer_home.jpg';
+import gamestackTextureLarge from '~/assets/FormFixer_camera.png';
+import gamestackTexturePlaceholder from '~/assets/FormFixer_camera.png';
+import gamestackTexture from '~/assets/FormFixer_camera.png';
+import sliceTextureLarge from '~/assets/MAiSTRO.png';
+import sliceTexturePlaceholder from '~/assets/MAiSTRO.png';
+import sliceTexture from '~/assets/MAiSTRO.png';
+import sprTextureLarge from '~/assets/Elkor.png';
+import sprTexturePlaceholder from '~/assets/Elkor.png';
+import sprTexture from '~/assets/Elkor.png';
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
 import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
-import { useEffect, useRef, useState } from 'react';
 import config from '~/config.json';
 import styles from './home.module.css';
 
-// Prefetch draco decoader wasm
 export const links = () => {
   return [
     {
@@ -41,31 +40,185 @@ export const links = () => {
 
 export const meta = () => {
   return baseMeta({
-    title: 'Designer + Developer',
-    description: `Design portfolio of ${config.name} — a product designer working on web & mobile apps with a focus on motion, experience design, and accessibility.`,
+    title: 'Software Engineer',
+    description: `${config.name} Portfolio — A fun, passionate, and results-oriented software engineer who loves traveling to learn about different cultures.`,
   });
 };
 
-export const Home = () => {
+const experiencesData = [
+  {
+    id: 1,
+    title: 'Google Cloud Skills Boost: Implement DevOps Workflows',
+    dateRange: '',
+    description:
+      'Completed hands-on labs and a challenge lab to earn the Google Cloud Skill Badge. Gained experience with Cloud Source Repositories, deploying and managing apps on GKE, and building CI/CD pipelines to automate container builds and deployments.',
+    tags: ['Kubernetes (GKE)', 'CI/CD', 'DevOps', 'Cloud Computing'],
+    logo: 'app/assets/GoogleIcon.png',
+    certificateImage: 'app/assets/GCP.png',
+  },
+  {
+    id: 2,
+    title: 'AWS: Introduction to Cloud 101',
+    dateRange: '',
+    description:
+      'AWS Training and Certification builds your competence, confidence, and credibility with practical cloud skills that help you innovate and advance your professional future. Whether you’re exploring new ideas, sharpening your cloud skills, learning about services, or preparing for certification, we have training to help you reach your goals. Use our digital badges to showcase your achievements, including AWS Certifications, which validate your cloud skills with an industry-recognized credential.',
+    tags: ['Amazon EC2', 'Amazon S3', 'RDS', 'Deployment'],
+    logo: 'app/assets/AwsIcon.png',
+    certificateImage: 'app/assets/AWS.png',
+  },
+  {
+    id: 3,
+    title: 'HackerRank: Node.js (Intermediate) Certificate',
+    dateRange: '',
+    description:
+      'HackerRank certification test for Node.js(Intermediate).',
+    tags: ['Node.js', 'JavaScript', 'Git', 'Frontend'],
+    logo: 'app/assets/HackerrankIcon.png',
+    certificateImage: 'app/assets/NodeJS.png',
+  },
+  {
+    id: 4,
+    title: 'HackerRank: React (Basic) Certificate',
+    dateRange: '',
+    description:
+      'React (Basic) It covers topics like Basic Routing, Rendering Elements,State Management (Internal Component State), Handling Events, ES6 and JavaScript and Form Validation.',
+    tags: ['React.js', 'JavaScript', 'Git', 'Frontend'],
+    logo: 'app/assets/HackerrankIcon.png',
+    certificateImage: 'app/assets/ReactJS.png',
+  },
+  {
+    id: 5,
+    title: 'Kaggle: 5-Day Gen AI Intensive Badge',
+    dateRange: '',
+    description:
+      'Completed the 5-Day Gen AI Intensive Course. This course was run in November 2024. Participants attended daily seminars, studied white papers, and completed daily assignments about Generative AI.',
+    tags: ['LLM', 'Neural Network', 'Google Gemini', 'Python', 'MLOps'],
+    logo: 'app/assets/KaggleIcon.png',
+    certificateImage: 'app/assets/kaggle_badge.jpg',
+  },
+  {
+    id: 6,
+    title: 'IBM: Fundamentals & Concepts Certification',
+    dateRange: '',
+    description:
+      'Completed mainframe fundamentals, including file management, JCL, USS, and security.',
+    tags: ['Mainframe', 'JCL', 'Operating System', 'COBOL', 'Linux', 'USS', 'REXX', 'Python'],
+    logo: 'app/assets/IbmIcon.png',
+    certificateImage: 'app/assets/IbmCertifcate.png',
+  },
+];
+
+function ExperienceItem(props) {
+  const {
+    title,
+    dateRange,
+    description,
+    tags,
+    logo,
+    certificateImage,
+  } = props;
+  const [expanded, setExpanded] = useState(false);
+
+  const handleToggle = () => setExpanded(!expanded);
+
+  return (
+    <div className={styles.experienceItem}>
+      <div className={styles.experienceHeader} onClick={handleToggle}>
+        {/* Left side: small logo + title */}
+        <div className={styles.headerLeft}>
+          {logo && (
+            <img
+              src={logo}
+              alt={`${title} logo`}
+              className={styles.certificateLogo}
+            />
+          )}
+          <strong>{title}</strong>
+        </div>
+
+        {/* Right side: date + expand icon */}
+        <div className={styles.headerRight}>
+          <span>{dateRange}</span>
+          <span style={{ marginLeft: '0.5rem', fontWeight: 'bold' }}>
+            {expanded ? '−' : '+'}
+          </span>
+        </div>
+      </div>
+
+      {expanded && (
+        <div className={styles.experienceDetails}>
+          {/* Smaller, centered certificate image */}
+          {certificateImage && (
+            <div className={styles.certificateImageWrapper}>
+              <img
+                src={certificateImage}
+                alt={`${title} certificate`}
+                className={styles.certificateImage}
+              />
+            </div>
+          )}
+
+          {description && <p style={{ margin: '0.5rem 0' }}><strong>Description: </strong></p>}
+
+          {description && <p style={{ margin: '0.5rem 0' }}>{description}</p>}
+
+          {tags && tags.length > 0 && (
+            <div className={styles.experienceTags}>
+              {tags.map((tag) => (
+                <strong><span key={tag} className={styles.experienceTag}>
+                  {tag}
+                </span></strong>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 6) Container for all experiences
+function WorkExperienceList({ sectionRef, visible, id }) {
+  return (
+    <section
+      ref={sectionRef}
+      id={id}
+      className={styles.experienceSection}
+      style={{ opacity: visible ? 1 : 0 }}
+    >
+      <h2 className={styles.experienceHeading}>Certifications & Training</h2>
+      {experiencesData.map((exp) => (
+        <ExperienceItem key={exp.id} {...exp} />
+      ))}
+    </section>
+  );
+}
+
+// 7) The main Home component (plain JS/JSX)
+export function Home() {
   const [visibleSections, setVisibleSections] = useState([]);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
-  const intro = useRef();
-  const projectOne = useRef();
-  const projectTwo = useRef();
-  const projectThree = useRef();
-  const details = useRef();
 
+  // Refs for each section
+  const intro = useRef(null);
+  const projectOne = useRef(null);
+  const projectTwo = useRef(null);
+  const projectThree = useRef(null);
+  const experienceRef = useRef(null);
+  const details = useRef(null);
+
+  // Intersection observer logic
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [intro, projectOne, projectTwo, projectThree, experienceRef, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const section = entry.target;
             observer.unobserve(section);
             if (visibleSections.includes(section)) return;
-            setVisibleSections(prevSections => [...prevSections, section]);
+            setVisibleSections((prev) => [...prev, section]);
           }
         });
       },
@@ -79,11 +232,11 @@ export const Home = () => {
       { rootMargin: '-100% 0px 0px 0px' }
     );
 
-    sections.forEach(section => {
-      sectionObserver.observe(section.current);
+    sections.forEach((sec) => {
+      if (sec.current) sectionObserver.observe(sec.current);
     });
 
-    indicatorObserver.observe(intro.current);
+    if (intro.current) indicatorObserver.observe(intro.current);
 
     return () => {
       sectionObserver.disconnect();
@@ -93,23 +246,26 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
+      {/* 1) Intro section */}
       <Intro
         id="intro"
         sectionRef={intro}
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
+
+      {/* 2) Project #1 */}
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Designing the future of education"
-        description="Designing a platform to help educators build better online courseware"
-        buttonText="View project"
-        buttonLink="/projects/smart-sparrow"
+        title="Elkor Technologies Inc Website"
+        description="Canadian-based electrical and electronic manufacturing company, delivering precision-engineered solutions through innovation and advanced design."
+        buttonText="View Website"
+        buttonLink="https://www.elkor.net/"
         model={{
           type: 'laptop',
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'Elkor website preview',
           textures: [
             {
               srcSet: `${sprTexture} 1280w, ${sprTextureLarge} 2560w`,
@@ -118,16 +274,18 @@ export const Home = () => {
           ],
         }}
       />
+
+      {/* 3) Project #2 */}
       <ProjectSummary
         id="project-2"
         alternate
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
-        buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
+        title="FormFixer.AI"
+        description="AI-powered fitness app that delivers real-time exercise form feedback, customizable workout routines, and personalized meal preparation."
+        buttonText="View Project"
+        buttonLink="https://github.com/DasolLim/FormFixer.AI"
         model={{
           type: 'phone',
           alt: 'App login screen',
@@ -143,18 +301,20 @@ export const Home = () => {
           ],
         }}
       />
+
+      {/* 4) Project #3 */}
       <ProjectSummary
         id="project-3"
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
+        title="MAiSTRO"
+        description="Real-time AI-powered piano composition based on user input using MIDI-trained models and dynamic visualizations."
         buttonText="View project"
-        buttonLink="/projects/slice"
+        buttonLink="https://github.com/DasolLim/MAiSTRO"
         model={{
           type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'MAiSTRO preview',
           textures: [
             {
               srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
@@ -163,12 +323,23 @@ export const Home = () => {
           ],
         }}
       />
+
+      {/* 6) Profile section */}
       <Profile
         sectionRef={details}
         visible={visibleSections.includes(details.current)}
         id="details"
       />
+
+      {/* 5) Work Experience section (the purple toggle cards) */}
+      <WorkExperienceList
+        sectionRef={experienceRef}
+        visible={visibleSections.includes(experienceRef.current)}
+        id="experience"
+      />
+
+      {/* 7) Footer */}
       <Footer />
     </div>
   );
-};
+}

@@ -43,7 +43,7 @@
   font-weight: var(--fontWeightMedium);
   line-height: 1;
   opacity: 0;
-  transition: opacity var(--durationL) var(--bezierFastoutSlowin) 0.2s;
+  transition: opacity var(--durationS) var(--bezierFastoutSlowin) 0.2s;
 
   @media (--mediaLaptop) {
     font-size: calc((22 / 16) * 1rem);
@@ -110,18 +110,18 @@
   flex-shrink: 0;
   align-items: center;
   line-height: 1;
-  animation-duration: 1.5s;
+  animation-duration: 1.0s;
   animation-delay: var(--delay);
   animation-fill-mode: forwards;
   animation-timing-function: var(--bezierFastoutSlowin);
   color: color-mix(in lab, var(--text) 0%, transparent);
-  transition: opacity 0.5s ease var(--durationM);
+  transition: opacity 0.5s ease var(--durationS);
   isolation: isolate;
 
   &::after {
     content: '';
     background: var(--accent);
-    animation-duration: 1.5s;
+    animation-duration: 1.0s;
     animation-delay: var(--delay);
     animation-fill-mode: forwards;
     animation-timing-function: var(--bezierFastoutSlowin);
@@ -237,7 +237,7 @@
   position: fixed;
   bottom: 64px;
   transition-property: opacity;
-  transition-duration: var(--durationL);
+  transition-duration: var(--durationS);
   transition-timing-function: ease;
   opacity: 0;
 
@@ -300,11 +300,11 @@
   position: fixed;
   bottom: 0;
   opacity: 0;
-  animation-duration: 1.5s;
+  animation-duration: 1.0s;
   animation-iteration-count: infinite;
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.8, 0.1, 0.27, 1);
-  transition-duration: var(--durationM);
+  transition-duration: var(--durationS);
   padding: 20px;
 
   @media (--mediaUseMotion) {
