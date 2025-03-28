@@ -4,11 +4,10 @@
     "paths": {
       "~/*": [
         "./app/*"
+      ],
+      "@/*": [
+        "./app/*"
       ]
     }
-  },
-  "include": [
-    "app",
-    ".storybook/story-container.jsx"
-  ]
+  }
 }
