@@ -9,30 +9,27 @@ export const navLinks = [
     label: 'Details',
     pathname: '/#details',
   },
+  // {
+  //   label: 'Contact',
+  //   pathname: '/contact',
+  // },
   {
-    label: 'Articles',
-    pathname: '/articles',
-  },
-  {
-    label: 'Contact',
-    pathname: '/contact',
+    label: 'Resume',
+    pathname: 'https://dasollimresume.tiiny.site',
+    target: '_blank',
   },
 ];
 
 export const socialLinks = [
   {
-    label: 'Bluesky',
-    url: `https://bsky.app/profile/${config.bluesky}`,
-    icon: 'bluesky',
-  },
-  {
-    label: 'Figma',
-    url: `https://www.figma.com/${config.figma}`,
-    icon: 'figma',
+    label: 'LinkedIn',
+    url: `https://www.linkedin.com/in/dlim67/`,
+    icon: 'linkedin',
   },
   {
     label: 'Github',
-    url: `https://github.com/${config.github}`,
+    url: `https://github.com/DasolLim`,
     icon: 'github',
   },
 ];
+
