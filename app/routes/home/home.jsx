@@ -18,6 +18,17 @@ import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
 import config from '~/config.json';
 import styles from './home.module.css';
+import GoogleLogo from '~/assets/GoogleIcon.png';
+import GoogleCert from '~/assets/GCP.png';
+import AWSLogo from '~/assets/AwsIcon.png';
+import AWSCert from '~/assets/AWS.png';
+import HackerRankLogo from '~/assets/HackerrankIcon.png';
+import NodeCert from '~/assets/NodeJS.png';
+import ReactCert from '~/assets/ReactJS.png';
+import KaggleLogo from '~/assets/KaggleIcon.png';
+import KaggleCert from '~/assets/kaggle_badge.jpg';
+import IBMLogo from '~/assets/IbmIcon.png';
+import IBMCert from '~/assets/IbmCertifcate.png';
 
 export const links = () => {
   return [
@@ -53,8 +64,8 @@ const experiencesData = [
     description:
       'Completed hands-on labs and a challenge lab to earn the Google Cloud Skill Badge. Gained experience with Cloud Source Repositories, deploying and managing apps on GKE, and building CI/CD pipelines to automate container builds and deployments.',
     tags: ['Kubernetes (GKE)', 'CI/CD', 'DevOps', 'Cloud Computing'],
-    logo: 'app/assets/GoogleIcon.png',
-    certificateImage: 'app/assets/GCP.png',
+    logo: GoogleLogo,
+    certificateImage: GoogleCert,
   },
   {
     id: 2,
@@ -63,8 +74,8 @@ const experiencesData = [
     description:
       'AWS Training and Certification builds your competence, confidence, and credibility with practical cloud skills that help you innovate and advance your professional future. Whether you’re exploring new ideas, sharpening your cloud skills, learning about services, or preparing for certification, we have training to help you reach your goals. Use our digital badges to showcase your achievements, including AWS Certifications, which validate your cloud skills with an industry-recognized credential.',
     tags: ['Amazon EC2', 'Amazon S3', 'RDS', 'Deployment'],
-    logo: 'app/assets/AwsIcon.png',
-    certificateImage: 'app/assets/AWS.png',
+    logo: AWSLogo,
+    certificateImage: AWSCert,
   },
   {
     id: 3,
@@ -73,8 +84,8 @@ const experiencesData = [
     description:
       'HackerRank certification test for Node.js(Intermediate).',
     tags: ['Node.js', 'JavaScript', 'Git', 'Frontend'],
-    logo: 'app/assets/HackerrankIcon.png',
-    certificateImage: 'app/assets/NodeJS.png',
+    logo: HackerRankLogo,
+    certificateImage: NodeCert,
   },
   {
     id: 4,
@@ -83,8 +94,8 @@ const experiencesData = [
     description:
       'React (Basic) It covers topics like Basic Routing, Rendering Elements,State Management (Internal Component State), Handling Events, ES6 and JavaScript and Form Validation.',
     tags: ['React.js', 'JavaScript', 'Git', 'Frontend'],
-    logo: 'app/assets/HackerrankIcon.png',
-    certificateImage: 'app/assets/ReactJS.png',
+    logo: HackerRankLogo,
+    certificateImage: ReactCert,
   },
   {
     id: 5,
@@ -93,8 +104,8 @@ const experiencesData = [
     description:
       'Completed the 5-Day Gen AI Intensive Course. This course was run in November 2024. Participants attended daily seminars, studied white papers, and completed daily assignments about Generative AI.',
     tags: ['LLM', 'Neural Network', 'Google Gemini', 'Python', 'MLOps'],
-    logo: 'app/assets/KaggleIcon.png',
-    certificateImage: 'app/assets/kaggle_badge.jpg',
+    logo: KaggleLogo,
+    certificateImage: KaggleCert,
   },
   {
     id: 6,
@@ -103,8 +114,8 @@ const experiencesData = [
     description:
       'Completed mainframe fundamentals, including file management, JCL, USS, and security.',
     tags: ['Mainframe', 'JCL', 'Operating System', 'COBOL', 'Linux', 'USS', 'REXX', 'Python'],
-    logo: 'app/assets/IbmIcon.png',
-    certificateImage: 'app/assets/IbmCertifcate.png',
+    logo: IBMLogo,
+    certificateImage: IBMCert,
   },
 ];
 
