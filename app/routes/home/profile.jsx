@@ -1,5 +1,5 @@
-import profileImgLarge from '~/assets/profile-large.jpg';
-import profileImgPlaceholder from '~/assets/profile-placeholder.jpg';
+import profileImgLarge from '~/assets/profile_picture.jpg';
+import profileImgPlaceholder from '~/assets/profile_picture.jpg';
 import profileImg from '~/assets/profile.jpg';
 import { Button } from '~/components/button';
 import { DecoderText } from '~/components/decoder-text';
@@ -21,16 +21,14 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hi there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Hamish, currently I live in Sydney working as a senior product designer at{' '}
-      <Link href="https://www.qwilr.com">Qwilr</Link>. My projects include UX design, UI
-      animations, and icon illustration. Being comfortable with code allows me to rapidly
-      prototype and validate experiences. If you’re interested in the tools and software I
-      use check out my <Link href="/uses">uses page</Link>.
+      I'm Dasol. I currently live in London, ON, and work as a Software Developer Intern at {' '}<Link href="https://ameerz.com/">Ameerz</Link>.
+      My projects include full-stack web development (MERN), AI model training and integration, and DevOps.
+      Being a passionate, driven, and results-oriented software engineer allows me to rapidly prototype and
+      validate user experiences. If you’re interested in the tools and software I use, check out my <Link href="/uses">uses page</Link>.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      In my spare time I like to practice Brazilian Jiu Jitsu, play video games, and{' '}
-      <Link href="/projects/volkihar-knight">make mods</Link>. I’m always down for hearing
-      about new projects, so feel free to drop me a line.
+      Some of my hobbies and interests include working out with friends, playing video games, camping, and traveling
+      (FYL, I traveled to Italy last summer). I love attending tech conferences like <Link href="https://www.linkedin.com/posts/dlim67_torontotechexpo-westerncybersociety-slalom-activity-7308965269362618368-z9wP?utm_source=share&utm_medium=member_desktop&rcm=ACoAADoqoUsBuW3RYBKwx4TCfeoOxE8pyfUhZ9g">TTE</Link> and staying updated on the latest technologies.
     </Text>
   </Fragment>
 );
@@ -59,10 +57,10 @@ export const Profile = ({ id, visible, sectionRef }) => {
                 secondary
                 className={styles.button}
                 data-visible={visible}
-                href="/contact"
+                href="https://www.linkedin.com/in/dlim67/"
                 icon="send"
               >
-                Send me a message
+                Let's Connect
               </Button>
             </div>
             <div className={styles.column}>

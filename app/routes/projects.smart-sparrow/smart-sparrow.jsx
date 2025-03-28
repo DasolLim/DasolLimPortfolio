@@ -13,27 +13,29 @@ import imageSprComponentsLight from '~/assets/spr-components-light.png';
 import imageSprDesignSystemDarkLarge from '~/assets/spr-design-system-dark-large.png';
 import imageSprDesignSystemDarkPlaceholder from '~/assets/spr-design-system-dark-placeholder.png';
 import imageSprDesignSystemDark from '~/assets/spr-design-system-dark.png';
+import imageArchitecture from '~/assets/Architecture.png';
+import imagemModelArchiecture from '~/assets/netron.png';
 import imageSprDesignSystemLightLarge from '~/assets/spr-design-system-light-large.png';
 import imageSprDesignSystemLightPlaceholder from '~/assets/spr-design-system-light-placeholder.png';
 import imageSprDesignSystemLight from '~/assets/spr-design-system-light.png';
-import imageSprLessonBuilderDarkLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
-import imageSprLessonBuilderDarkPlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import imageSprLessonBuilderDark from '~/assets/spr-lesson-builder-dark.jpg';
+import imageSprLessonBuilderDarkLarge from '~/assets/og.jpg';
+import imageSprLessonBuilderDarkPlaceholder from '~/assets/og.jpg';
+import imageSprLessonBuilderDark from '~/assets/og.jpg';
 import imageSprLessonBuilderLightLarge from '~/assets/spr-lesson-builder-light-large.jpg';
 import imageSprLessonBuilderLightPlaceholder from '~/assets/spr-lesson-builder-light-placeholder.jpg';
 import imageSprLessonBuilderLight from '~/assets/spr-lesson-builder-light.jpg';
 import videoSprMotionLarge from '~/assets/spr-motion-large.mp4';
 import videoSprMotionPlaceholder from '~/assets/spr-motion-placeholder.jpg';
 import videoSprMotion from '~/assets/spr-motion.mp4';
-import imageSprSchema1DarkLarge from '~/assets/spr-schema-1-dark-large.png';
-import imageSprSchema1DarkPlaceholder from '~/assets/spr-schema-1-dark-placeholder.png';
-import imageSprSchema1Dark from '~/assets/spr-schema-1-dark.png';
+import imageSprSchema1DarkLarge from '~/assets/FormFixer_workout.jpg';
+import imageSprSchema1DarkPlaceholder from '~/assets/FormFixer_workout.jpg';
+import imageSprSchema1Dark from '~/assets/FormFixer_workout.jpg';
 import imageSprSchema1LightLarge from '~/assets/spr-schema-1-light-large.png';
 import imageSprSchema1LightPlaceholder from '~/assets/spr-schema-1-light-placeholder.png';
 import imageSprSchema1Light from '~/assets/spr-schema-1-light.png';
-import imageSprSchema2DarkLarge from '~/assets/spr-schema-2-dark-large.png';
-import imageSprSchema2DarkPlaceholder from '~/assets/spr-schema-2-dark-placeholder.png';
-import imageSprSchema2Dark from '~/assets/spr-schema-2-dark.png';
+import imageSprSchema2DarkLarge from '~/assets/FormFixer_camera.png';
+import imageSprSchema2DarkPlaceholder from '~/assets/FormFixer_camera.png';
+import imageSprSchema2Dark from '~/assets/FormFixer_camera.png';
 import imageSprSchema2LightLarge from '~/assets/spr-schema-2-light-large.png';
 import imageSprSchema2LightPlaceholder from '~/assets/spr-schema-2-light-placeholder.png';
 import imageSprSchema2Light from '~/assets/spr-schema-2-light.png';
@@ -129,7 +131,69 @@ export const SmartSparrow = () => {
               alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
             />
           </ProjectSectionContent>
+          <SegmentedControl
+            currentIndex={themes.indexOf(theme)}
+            onChange={handleThemeChange}
+          >
+            <SegmentedControlOption>Dark theme</SegmentedControlOption>
+            <SegmentedControlOption>Light theme</SegmentedControlOption>
+          </SegmentedControl>
         </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionColumns>
+            <ProjectSectionContent>
+              <ProjectTextRow>
+                <ProjectSectionHeading>
+                  An extensible plugin ecosystem usable by everyone
+                </ProjectSectionHeading>
+                <ProjectSectionText>
+                  The most powerful aspect of the platform is the ability to create custom
+                  plugins for any content, whether it be a degree, course, lesson, screen,
+                  or interactive component. Out of the box these can be made configurable
+                  with minimal effort from developers. Learning designers can then edit
+                  everything using a common configuration interface.
+                </ProjectSectionText>
+              </ProjectTextRow>
+            </ProjectSectionContent>
+            <div className={styles.sidebarImages}>
+              <Image
+                className={styles.sidebarImage}
+                srcSet={
+                  isDark
+                    ? `${imageSprSchema2Dark} 260w, ${imageSprSchema2DarkLarge} 520w`
+                    : `${imageSprSchema2Light} 260w, ${imageSprSchema2LightLarge} 520w`
+                }
+                width={260}
+                height={660}
+                placeholder={
+                  isDark
+                    ? imageSprSchema2DarkPlaceholder
+                    : imageSprSchema2LightPlaceholder
+                }
+                alt="Configuration options for a component."
+                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+              />
+              <Image
+                className={styles.sidebarImage}
+                srcSet={
+                  isDark
+                    ? `${imageSprSchema1Dark} 260w, ${imageSprSchema1DarkLarge} 520w`
+                    : `${imageSprSchema1Light} 260w, ${imageSprSchema1LightLarge} 520w`
+                }
+                width={260}
+                height={660}
+                placeholder={
+                  isDark
+                    ? imageSprSchema1DarkPlaceholder
+                    : imageSprSchema1LightPlaceholder
+                }
+                alt="Configuration options for text."
+                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
+              />
+            </div>
+          </ProjectSectionColumns>
+        </ProjectSection>
+
         <ProjectSection>
           <ProjectTextRow>
             <ProjectSectionHeading>The problem</ProjectSectionHeading>
@@ -144,34 +208,39 @@ export const SmartSparrow = () => {
             </ProjectSectionText>
           </ProjectTextRow>
         </ProjectSection>
-        <ProjectSection light={isDark}>
+        <ProjectSection>
           <ProjectSectionContent>
             <Image
+              raised
               key={theme}
               srcSet={
                 isDark
-                  ? `${imageSprComponentsDark} 1024w, ${imageSprComponentsDarkLarge} 2048w`
-                  : `${imageSprComponentsLight} 1024w, ${imageSprComponentsLightLarge} 2048w`
+                  ? `${imagemModelArchiecture} 1280w, ${imagemModelArchiecture} 2560w`
+                  : `${imagemModelArchiecture} 1280w, ${imagemModelArchiecture} 2560w`
               }
-              width={1024}
-              hright={800}
+              width={1280}
+              height={800}
               placeholder={
                 isDark
-                  ? imageSprComponentsDarkPlaceholder
-                  : imageSprComponentsLightPlaceholder
+                  ? imagemModelArchiecture
+                  : imagemModelArchiecture
               }
-              alt={`A set of ${theme} themed components for the aero design system`}
+              alt="The homepage of the aero design system docs website linking to principles and components."
               sizes="100vw"
             />
             <ProjectTextRow>
-              <SegmentedControl
-                currentIndex={themes.indexOf(theme)}
-                onChange={handleThemeChange}
-              >
-                <SegmentedControlOption>Dark theme</SegmentedControlOption>
-                <SegmentedControlOption>Light theme</SegmentedControlOption>
-              </SegmentedControl>
+              <ProjectSectionHeading>Design system docs</ProjectSectionHeading>
+              <ProjectSectionText>
+                A design system is useless if no one knows how to use it, so we put
+                together a comprehensive documentation website to cover principles, ux,
+                accessibility, and component guidelines for designers and engineers
+                working with the system.
+              </ProjectSectionText>
             </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection light={isDark}>
+          <ProjectSectionContent>
             <ProjectTextRow>
               <ProjectSectionHeading>The aero design system</ProjectSectionHeading>
               <ProjectSectionText>
@@ -191,15 +260,15 @@ export const SmartSparrow = () => {
               key={theme}
               srcSet={
                 isDark
-                  ? `${imageSprDesignSystemDark} 1280w, ${imageSprDesignSystemDarkLarge} 2560w`
-                  : `${imageSprDesignSystemLight} 1280w, ${imageSprDesignSystemLightLarge} 2560w`
+                  ? `${imageArchitecture} 1280w, ${imageArchitecture} 2560w`
+                  : `${imageArchitecture} 1280w, ${imageArchitecture} 2560w`
               }
               width={1280}
               height={800}
               placeholder={
                 isDark
-                  ? imageSprDesignSystemDarkPlaceholder
-                  : imageSprDesignSystemLightPlaceholder
+                  ? imageArchitecture
+                  : imageArchitecture
               }
               alt="The homepage of the aero design system docs website linking to principles and components."
               sizes="100vw"
@@ -286,60 +355,7 @@ export const SmartSparrow = () => {
             />
           </ProjectSectionContent>
         </ProjectSection>
-        <ProjectSection>
-          <ProjectSectionColumns>
-            <ProjectSectionContent>
-              <ProjectTextRow>
-                <ProjectSectionHeading>
-                  An extensible plugin ecosystem usable by everyone
-                </ProjectSectionHeading>
-                <ProjectSectionText>
-                  The most powerful aspect of the platform is the ability to create custom
-                  plugins for any content, whether it be a degree, course, lesson, screen,
-                  or interactive component. Out of the box these can be made configurable
-                  with minimal effort from developers. Learning designers can then edit
-                  everything using a common configuration interface.
-                </ProjectSectionText>
-              </ProjectTextRow>
-            </ProjectSectionContent>
-            <div className={styles.sidebarImages}>
-              <Image
-                className={styles.sidebarImage}
-                srcSet={
-                  isDark
-                    ? `${imageSprSchema2Dark} 260w, ${imageSprSchema2DarkLarge} 520w`
-                    : `${imageSprSchema2Light} 260w, ${imageSprSchema2LightLarge} 520w`
-                }
-                width={260}
-                height={660}
-                placeholder={
-                  isDark
-                    ? imageSprSchema2DarkPlaceholder
-                    : imageSprSchema2LightPlaceholder
-                }
-                alt="Configuration options for a component."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-              <Image
-                className={styles.sidebarImage}
-                srcSet={
-                  isDark
-                    ? `${imageSprSchema1Dark} 260w, ${imageSprSchema1DarkLarge} 520w`
-                    : `${imageSprSchema1Light} 260w, ${imageSprSchema1LightLarge} 520w`
-                }
-                width={260}
-                height={660}
-                placeholder={
-                  isDark
-                    ? imageSprSchema1DarkPlaceholder
-                    : imageSprSchema1LightPlaceholder
-                }
-                alt="Configuration options for text."
-                sizes={`(max-width: ${media.mobile}px) 50vw, 25vw`}
-              />
-            </div>
-          </ProjectSectionColumns>
-        </ProjectSection>
+
         <ThemeProvider theme="dark" data-invert>
           <Suspense>
             <Earth
