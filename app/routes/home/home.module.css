@@ -103,6 +103,10 @@
   flex-wrap: wrap;
   gap: var(--spaceXS, 0.5rem);
   margin-top: var(--spaceS, 0.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  /* This adds 0.5rem space between items */
 }
 
 .experienceTag {
@@ -110,6 +114,9 @@
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.85rem;
+  display: inline-block;
+  margin: 0.25rem 0;
+  /* vertical spacing so they're not hugging adjacent text */
 }
 
 /* Responsive tweaks if desired */
