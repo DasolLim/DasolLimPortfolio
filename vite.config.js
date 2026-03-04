@@ -8,10 +8,13 @@ import rehypeImgSize from 'rehype-img-size';
 import rehypeSlug from 'rehype-slug';
 import rehypePrism from '@mapbox/rehype-prism';
 
+const vercelPreset = () => ({ name: 'vercelPreset' });
+
 export default defineConfig({
   assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.glsl'],
   build: {
     assetsInlineLimit: 1024,
+    chunkSizeWarningLimit: 700,
   },
   server: {
     port: 7777,
@@ -23,6 +26,7 @@ export default defineConfig({
       providerImportSource: '@mdx-js/react',
     }),
     remix({
+      presets: [vercelPreset()],
       routes(defineRoutes) {
         return defineRoutes(route => {
           route('/', 'routes/home/route.js', { index: true });
