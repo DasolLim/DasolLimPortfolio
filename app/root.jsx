@@ -18,6 +18,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { Navbar } from '~/layouts/navbar';
 import { Progress } from '~/components/progress';
 import config from '~/config.json';
+import { getSession, commitSession } from '~/utils/session.server';
 import styles from './root.module.css';
 import './reset.module.css';
 import './global.module.css';
