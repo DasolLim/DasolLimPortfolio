@@ -8,7 +8,7 @@ const { renderToPipeableStream, renderToReadableStream } = ReactDOMServer;
 
 const ABORT_DELAY = 5000;
 
-export default function handleRequest(
+export default async function handleRequest(
   request,
   responseStatusCode,
   responseHeaders,
