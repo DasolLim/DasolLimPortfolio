@@ -2,7 +2,9 @@ import { PassThrough } from 'node:stream';
 import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
-import { renderToPipeableStream } from 'react-dom/server';
+import ReactDOMServer from 'react-dom/server';
+
+const { renderToPipeableStream, renderToReadableStream } = ReactDOMServer;
 
 const ABORT_DELAY = 5000;
 
@@ -12,9 +14,41 @@ export default function handleRequest(
   responseHeaders,
   remixContext
 ) {
+  if (typeof renderToReadableStream === 'function') {
+    return handleWebStreamRequest(request, responseStatusCode, responseHeaders, remixContext);
+  }
+
   return isbot(request.headers.get('user-agent') || '')
     ? handleBotRequest(request, responseStatusCode, responseHeaders, remixContext)
     : handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext);
+}
+
+async function handleWebStreamRequest(
+  request,
+  responseStatusCode,
+  responseHeaders,
+  remixContext
+) {
+  const body = await renderToReadableStream(
+    <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
+    {
+      onError(error) {
+        responseStatusCode = 500;
+        console.error(error);
+      },
+    }
+  );
+
+  if (isbot(request.headers.get('user-agent') || '')) {
+    await body.allReady;
+  }
+
+  responseHeaders.set('Content-Type', 'text/html');
+
+  return new Response(body, {
+    headers: responseHeaders,
+    status: responseStatusCode,
+  });
 }
 
 function handleBotRequest(request, responseStatusCode, responseHeaders, remixContext) {
