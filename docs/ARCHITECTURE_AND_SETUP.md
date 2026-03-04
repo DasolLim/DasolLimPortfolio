@@ -99,12 +99,11 @@ npm run start
 
 ### Environment variables for contact form
 
-For local contact form testing (and Vercel production), configure variables used by `contact` action and theme session secret:
+For local contact form testing (and Vercel production), configure variables used by `contact` action:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `EMAIL`
 - `FROM_EMAIL`
-- `SESSION_SECRET`
 
 These should be provided in local/dev environment and in Vercel Project Settings for production.

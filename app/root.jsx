@@ -52,15 +52,14 @@ export const loader = async ({ request }) => {
   const pathnameSliced = pathname.endsWith('/') ? pathname.slice(0, -1) : url;
   const canonicalUrl = `${config.url}${pathnameSliced}`;
 
-  const { getSession, commitSession } = await import('~/utils/session.server');
-  const session = await getSession(request.headers.get('Cookie'));
-  const theme = session.get('theme') || 'dark';
+  const { getThemeFromCookieHeader, createThemeCookie } = await import('~/utils/theme-cookie');
+  const theme = getThemeFromCookieHeader(request.headers.get('Cookie')) || 'dark';
 
   return Response.json(
     { canonicalUrl, theme },
     {
       headers: {
-        'Set-Cookie': await commitSession(session),
+        'Set-Cookie': createThemeCookie(theme),
       },
     }
   );

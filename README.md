@@ -40,7 +40,6 @@ For a concise architecture walkthrough + VS Code-friendly setup commands, see [`
 3. Set the build command to `npm run build` (already in `vercel.json`).
 4. Add required environment variables in Vercel Project Settings:
 
-- `SESSION_SECRET`
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `EMAIL`
