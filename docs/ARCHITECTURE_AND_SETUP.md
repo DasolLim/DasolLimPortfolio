@@ -3,7 +3,7 @@
 ## 1) Stack used (short + clear)
 
 - **Framework:** Remix (running on Vite) for routing, loaders/actions, and SSR-friendly React rendering.
-- **Runtime/Hosting:** Cloudflare Pages + Cloudflare Functions adapter.
+- **Runtime/Hosting:** Remix app deployed on Vercel (Node runtime), with legacy Cloudflare config still present in repo.
 - **UI:** React 18 + CSS Modules + custom reusable components in `app/components`.
 - **Animation/3D:** Framer Motion + Three.js (`three-stdlib`) + GLSL shaders.
 - **Content:** MDX for article pages with frontmatter, syntax highlighting, slugged headings, and image sizing plugins.
@@ -34,8 +34,8 @@
 
 6. **Build + deploy pipeline**
    - `npm run build` runs Remix Vite build.
-   - Cloudflare Function entry (`functions/[[path]].js`) serves Remix build.
-   - Wrangler config deploys static build output to Cloudflare Pages.
+   - `vercel.json` configures Vercel build/install commands.
+   - Deploy from Vercel dashboard or `npm run deploy:vercel`.
 
 ## 3) Core folder map
 
