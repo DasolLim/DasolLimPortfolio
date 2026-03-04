@@ -93,13 +93,13 @@ npm run dev:storybook
 # Build production assets
 npm run build
 
-# Preview Pages output locally
+# Preview Node server output locally
 npm run start
 ```
 
 ### Environment variables for contact form
 
-For local contact form testing, configure Cloudflare/AWS variables used by `contact` action and theme session secret:
+For local contact form testing (and Vercel production), configure variables used by `contact` action and theme session secret:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
@@ -107,4 +107,4 @@ For local contact form testing, configure Cloudflare/AWS variables used by `cont
 - `FROM_EMAIL`
 - `SESSION_SECRET`
 
-These should be provided in the local/dev environment and in Cloudflare Pages project settings for production.
+These should be provided in local/dev environment and in Vercel Project Settings for production.

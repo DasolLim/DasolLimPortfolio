@@ -9,7 +9,6 @@ import {
   useNavigation,
   useRouteError,
 } from '@remix-run/react';
-import { json } from '@remix-run/node';
 import { ThemeProvider, themeStyles } from '~/components/theme-provider';
 import GothamBook from '~/assets/fonts/gotham-book.woff2';
 import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
@@ -53,10 +52,11 @@ export const loader = async ({ request }) => {
   const pathnameSliced = pathname.endsWith('/') ? pathname.slice(0, -1) : url;
   const canonicalUrl = `${config.url}${pathnameSliced}`;
 
+  const { getSession, commitSession } = await import('~/utils/session.server');
   const session = await getSession(request.headers.get('Cookie'));
   const theme = session.get('theme') || 'dark';
 
-  return json(
+  return Response.json(
     { canonicalUrl, theme },
     {
       headers: {

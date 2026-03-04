@@ -1,14 +1,13 @@
-import { json } from '@remix-run/node';
-import { getSession, commitSession } from '~/utils/session.server';
 
 export async function action({ request }) {
   const formData = await request.formData();
   const theme = formData.get('theme');
 
+  const { getSession, commitSession } = await import('~/utils/session.server');
   const session = await getSession(request.headers.get('Cookie'));
   session.set('theme', theme);
 
-  return json(
+  return Response.json(
     { status: 'success' },
     {
       headers: {
