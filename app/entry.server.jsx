@@ -1,5 +1,3 @@
-import * as Stream from 'node:stream';
-import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import ReactDOMServer from 'react-dom/server';
@@ -51,68 +49,75 @@ async function handleWebStreamRequest(
   });
 }
 
-function handleBotRequest(request, responseStatusCode, responseHeaders, remixContext) {
-  return new Promise((resolve, reject) => {
-    const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
-      {
-        onAllReady() {
-          const body = new Stream.PassThrough();
-          const stream = createReadableStreamFromReadable(body);
-
-          responseHeaders.set('Content-Type', 'text/html');
-
-          resolve(
-            new Response(stream, {
-              headers: responseHeaders,
-              status: responseStatusCode,
-            })
-          );
-
-          pipe(body);
-        },
-        onShellError(error) {
-          reject(error);
-        },
-        onError(error) {
-          responseStatusCode = 500;
-          console.error(error);
-        },
-      }
-    );
-
-    setTimeout(abort, ABORT_DELAY);
+async function handleBotRequest(request, responseStatusCode, responseHeaders, remixContext) {
+  return handleNodeStreamRequest({
+    request,
+    responseStatusCode,
+    responseHeaders,
+    remixContext,
+    ready: 'onAllReady',
   });
 }
 
-function handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext) {
+async function handleBrowserRequest(
+  request,
+  responseStatusCode,
+  responseHeaders,
+  remixContext
+) {
+  return handleNodeStreamRequest({
+    request,
+    responseStatusCode,
+    responseHeaders,
+    remixContext,
+    ready: 'onShellReady',
+  });
+}
+
+async function handleNodeStreamRequest({
+  request,
+  responseStatusCode,
+  responseHeaders,
+  remixContext,
+  ready,
+}) {
+  const [{ createReadableStreamFromReadable }, StreamModule] = await Promise.all([
+    import('@remix-run/node'),
+    import('node:stream'),
+  ]);
+
+  const PassThrough = StreamModule.PassThrough;
+
   return new Promise((resolve, reject) => {
+    const callbacks = {
+      onShellError(error) {
+        reject(error);
+      },
+      onError(error) {
+        responseStatusCode = 500;
+        console.error(error);
+      },
+    };
+
+    callbacks[ready] = () => {
+      const body = new PassThrough();
+      const stream = createReadableStreamFromReadable(body);
+
+      responseHeaders.set('Content-Type', 'text/html');
+
+      resolve(
+        new Response(stream, {
+          headers: responseHeaders,
+          status: responseStatusCode,
+        })
+      );
+
+      pipe(body);
+    };
+
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
-      {
-        onShellReady() {
-          const body = new Stream.PassThrough();
-          const stream = createReadableStreamFromReadable(body);
-
-          responseHeaders.set('Content-Type', 'text/html');
-
-          resolve(
-            new Response(stream, {
-              headers: responseHeaders,
-              status: responseStatusCode,
-            })
-          );
-
-          pipe(body);
-        },
-        onShellError(error) {
-          reject(error);
-        },
-        onError(error) {
-          responseStatusCode = 500;
-          console.error(error);
-        },
-      }
+      callbacks
     );
 
     setTimeout(abort, ABORT_DELAY);
