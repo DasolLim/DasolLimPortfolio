@@ -2,7 +2,7 @@ import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import ReactDOMServer from 'react-dom/server';
 
-const { renderToPipeableStream, renderToReadableStream } = ReactDOMServer;
+const { renderToPipeableStream } = ReactDOMServer;
 
 const ABORT_DELAY = 5000;
 
