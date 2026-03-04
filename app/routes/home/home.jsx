@@ -67,8 +67,9 @@ export function Home() {
           if (entry.isIntersecting) {
             const section = entry.target;
             observer.unobserve(section);
-            if (visibleSections.includes(section)) return;
-            setVisibleSections((prev) => [...prev, section]);
+            setVisibleSections((prev) =>
+              prev.includes(section) ? prev : [...prev, section]
+            );
           }
         });
       },
@@ -92,7 +93,7 @@ export function Home() {
       sectionObserver.disconnect();
       indicatorObserver.disconnect();
     };
-  }, [visibleSections]);
+  }, []);
 
   return (
     <div className={styles.home}>
