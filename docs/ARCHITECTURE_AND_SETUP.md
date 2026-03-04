@@ -52,7 +52,7 @@
 
 ### Prerequisites
 
-- Node.js **19.9.0+** (project engine requirement)
+- Node.js **24.0.0+** (project engine requirement)
 - npm **9.6.3+**
 - Git
 

@@ -18,7 +18,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { Navbar } from '~/layouts/navbar';
 import { Progress } from '~/components/progress';
 import config from '~/config.json';
-import { getSession, commitSession } from '~/utils/session.server';
+import { getThemeFromCookieHeader, createThemeCookie } from '~/utils/theme-cookie';
 import styles from './root.module.css';
 import './reset.module.css';
 import './global.module.css';
@@ -52,7 +52,6 @@ export const loader = async ({ request }) => {
   const pathnameSliced = pathname.endsWith('/') ? pathname.slice(0, -1) : url;
   const canonicalUrl = `${config.url}${pathnameSliced}`;
 
-  const { getThemeFromCookieHeader, createThemeCookie } = await import('~/utils/theme-cookie');
   const theme = getThemeFromCookieHeader(request.headers.get('Cookie')) || 'dark';
 
   return Response.json(
