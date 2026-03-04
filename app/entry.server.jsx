@@ -1,5 +1,3 @@
-import { PassThrough } from 'node:stream';
-import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import ReactDOMServer from 'react-dom/server';
@@ -8,7 +6,7 @@ const { renderToPipeableStream, renderToReadableStream } = ReactDOMServer;
 
 const ABORT_DELAY = 5000;
 
-export default function handleRequest(
+export default async function handleRequest(
   request,
   responseStatusCode,
   responseHeaders,
