@@ -27,6 +27,10 @@ To view the components storybook:
 npm run dev:storybook
 ```
 
+## Architecture & setup
+
+For a concise architecture walkthrough + VS Code-friendly setup commands, see [`docs/ARCHITECTURE_AND_SETUP.md`](docs/ARCHITECTURE_AND_SETUP.md).
+
 ## Deployment
 
 I've set up the site using Cloudflare for hosting. Deploy the site to Cloudflare Pages:
