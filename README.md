@@ -27,9 +27,32 @@ To view the components storybook:
 npm run dev:storybook
 ```
 
+## Architecture & setup
+
+For a concise architecture walkthrough + VS Code-friendly setup commands, see [`docs/ARCHITECTURE_AND_SETUP.md`](docs/ARCHITECTURE_AND_SETUP.md).
+
 ## Deployment
 
-I've set up the site using Cloudflare for hosting. Deploy the site to Cloudflare Pages:
+### Deploy to Vercel
+
+1. Push this repository to GitHub/GitLab/Bitbucket.
+2. Import the project in Vercel (Framework preset: **Remix**).
+3. Set the build command to `npm run build` (already in `vercel.json`).
+4. Add required environment variables in Vercel Project Settings:
+
+- `SESSION_SECRET`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `EMAIL`
+- `FROM_EMAIL`
+
+5. Deploy from Vercel dashboard, or use:
+
+```bash
+npm run deploy:vercel
+```
+
+### Deploy to Cloudflare Pages (legacy)
 
 ```bash
 npm run deploy
