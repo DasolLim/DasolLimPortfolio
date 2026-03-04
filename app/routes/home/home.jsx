@@ -18,17 +18,6 @@ import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
 import config from '~/config.json';
 import styles from './home.module.css';
-import GoogleLogo from '~/assets/GoogleIcon.png';
-import GoogleCert from '~/assets/GCP.png';
-import AWSLogo from '~/assets/AwsIcon.png';
-import AWSCert from '~/assets/AWS.png';
-import HackerRankLogo from '~/assets/HackerrankIcon.png';
-import NodeCert from '~/assets/NodeJS.png';
-import ReactCert from '~/assets/ReactJS.png';
-import KaggleLogo from '~/assets/KaggleIcon.png';
-import KaggleCert from '~/assets/kaggle_badge.jpg';
-import IBMLogo from '~/assets/IbmIcon.png';
-import IBMCert from '~/assets/IbmCertifcate.png';
 
 export const links = () => {
   return [
@@ -56,155 +45,6 @@ export const meta = () => {
   });
 };
 
-const experiencesData = [
-  {
-    id: 1,
-    title: 'Google Cloud Skills Boost: Implement DevOps Workflows',
-    dateRange: '',
-    description:
-      'Completed hands-on labs and a challenge lab to earn the Google Cloud Skill Badge. Gained experience with Cloud Source Repositories, deploying and managing apps on GKE, and building CI/CD pipelines to automate container builds and deployments.',
-    tags: ['Kubernetes (GKE)', 'CI/CD', 'DevOps', 'Cloud Computing'],
-    logo: GoogleLogo,
-    certificateImage: GoogleCert,
-  },
-  {
-    id: 2,
-    title: 'AWS: Introduction to Cloud 101',
-    dateRange: '',
-    description:
-      'AWS Training and Certification builds your competence, confidence, and credibility with practical cloud skills that help you innovate and advance your professional future. Whether you’re exploring new ideas, sharpening your cloud skills, learning about services, or preparing for certification, we have training to help you reach your goals. Use our digital badges to showcase your achievements, including AWS Certifications, which validate your cloud skills with an industry-recognized credential.',
-    tags: ['Amazon EC2', 'Amazon S3', 'RDS', 'Deployment'],
-    logo: AWSLogo,
-    certificateImage: AWSCert,
-  },
-  {
-    id: 3,
-    title: 'HackerRank: Node.js (Intermediate) Certificate',
-    dateRange: '',
-    description:
-      'HackerRank certification test for Node.js(Intermediate).',
-    tags: ['Node.js', 'JavaScript', 'Git', 'Frontend'],
-    logo: HackerRankLogo,
-    certificateImage: NodeCert,
-  },
-  {
-    id: 4,
-    title: 'HackerRank: React (Basic) Certificate',
-    dateRange: '',
-    description:
-      'React (Basic) It covers topics like Basic Routing, Rendering Elements,State Management (Internal Component State), Handling Events, ES6 and JavaScript and Form Validation.',
-    tags: ['React.js', 'JavaScript', 'Git', 'Frontend'],
-    logo: HackerRankLogo,
-    certificateImage: ReactCert,
-  },
-  {
-    id: 5,
-    title: 'Kaggle: 5-Day Gen AI Intensive Badge',
-    dateRange: '',
-    description:
-      'Completed the 5-Day Gen AI Intensive Course. This course was run in November 2024. Participants attended daily seminars, studied white papers, and completed daily assignments about Generative AI.',
-    tags: ['LLM', 'Neural Network', 'Google Gemini', 'Python', 'MLOps'],
-    logo: KaggleLogo,
-    certificateImage: KaggleCert,
-  },
-  {
-    id: 6,
-    title: 'IBM: Fundamentals & Concepts Certification',
-    dateRange: '',
-    description:
-      'Completed mainframe fundamentals, including file management, JCL, USS, and security.',
-    tags: ['Mainframe', 'JCL', 'Operating System', 'COBOL', 'Linux', 'USS', 'REXX', 'Python'],
-    logo: IBMLogo,
-    certificateImage: IBMCert,
-  },
-];
-
-function ExperienceItem(props) {
-  const {
-    title,
-    dateRange,
-    description,
-    tags,
-    logo,
-    certificateImage,
-  } = props;
-  const [expanded, setExpanded] = useState(false);
-
-  const handleToggle = () => setExpanded(!expanded);
-
-  return (
-    <div className={styles.experienceItem}>
-      <div className={styles.experienceHeader} onClick={handleToggle}>
-        {/* Left side: small logo + title */}
-        <div className={styles.headerLeft}>
-          {logo && (
-            <img
-              src={logo}
-              alt={`${title} logo`}
-              className={styles.certificateLogo}
-            />
-          )}
-          <strong>{title}</strong>
-        </div>
-
-        {/* Right side: date + expand icon */}
-        <div className={styles.headerRight}>
-          <span>{dateRange}</span>
-          <span style={{ marginLeft: '0.5rem', fontWeight: 'bold' }}>
-            {expanded ? '−' : '+'}
-          </span>
-        </div>
-      </div>
-
-      {expanded && (
-        <div className={styles.experienceDetails}>
-          {/* Smaller, centered certificate image */}
-          {certificateImage && (
-            <div className={styles.certificateImageWrapper}>
-              <img
-                src={certificateImage}
-                alt={`${title} certificate`}
-                className={styles.certificateImage}
-              />
-            </div>
-          )}
-
-          {description && <p style={{ margin: '0.5rem 0' }}><strong>Description: </strong></p>}
-
-          {description && <p style={{ margin: '0.5rem 0' }}>{description}</p>}
-
-          {tags && tags.length > 0 && (
-            <div className={styles.experienceTags}>
-              {tags.map((tag) => (
-                <strong><span key={tag} className={styles.experienceTag}>
-                  {tag}
-                </span></strong>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// 6) Container for all experiences
-function WorkExperienceList({ sectionRef, visible, id }) {
-  return (
-    <section
-      ref={sectionRef}
-      id={id}
-      className={styles.experienceSection}
-      style={{ opacity: visible ? 1 : 0 }}
-    >
-      <h2 className={styles.experienceHeading}>Certifications & Training</h2>
-      {experiencesData.map((exp) => (
-        <ExperienceItem key={exp.id} {...exp} />
-      ))}
-    </section>
-  );
-}
-
 // 7) The main Home component (plain JS/JSX)
 export function Home() {
   const [visibleSections, setVisibleSections] = useState([]);
@@ -215,12 +55,11 @@ export function Home() {
   const projectOne = useRef(null);
   const projectTwo = useRef(null);
   const projectThree = useRef(null);
-  const experienceRef = useRef(null);
   const details = useRef(null);
 
   // Intersection observer logic
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, experienceRef, details];
+    const sections = [intro, projectOne, projectTwo, projectThree, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -228,8 +67,9 @@ export function Home() {
           if (entry.isIntersecting) {
             const section = entry.target;
             observer.unobserve(section);
-            if (visibleSections.includes(section)) return;
-            setVisibleSections((prev) => [...prev, section]);
+            setVisibleSections((prev) =>
+              prev.includes(section) ? prev : [...prev, section]
+            );
           }
         });
       },
@@ -253,7 +93,7 @@ export function Home() {
       sectionObserver.disconnect();
       indicatorObserver.disconnect();
     };
-  }, [visibleSections]);
+  }, []);
 
   return (
     <div className={styles.home}>
@@ -342,12 +182,6 @@ export function Home() {
         id="details"
       />
 
-      {/* 5) Work Experience section (the purple toggle cards) */}
-      <WorkExperienceList
-        sectionRef={experienceRef}
-        visible={visibleSections.includes(experienceRef.current)}
-        id="experience"
-      />
 
       {/* 7) Footer */}
       <Footer />
