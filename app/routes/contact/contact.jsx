@@ -14,7 +14,6 @@ import { useRef } from 'react';
 import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { json } from '@remix-run/cloudflare';
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import styles from './contact.module.css';
 
@@ -30,12 +29,12 @@ const MAX_EMAIL_LENGTH = 512;
 const MAX_MESSAGE_LENGTH = 4096;
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
 
-export async function action({ context, request }) {
+export async function action({ request }) {
   const ses = new SESClient({
     region: 'us-east-1',
     credentials: {
-      accessKeyId: context.cloudflare.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: context.cloudflare.env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
   });
 
@@ -46,7 +45,7 @@ export async function action({ context, request }) {
   const errors = {};
 
   // Return without sending if a bot trips the honeypot
-  if (isBot) return json({ success: true });
+  if (isBot) return Response.json({ success: true });
 
   // Handle input validation on the server
   if (!email || !EMAIL_PATTERN.test(email)) {
@@ -66,14 +65,14 @@ export async function action({ context, request }) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return json({ errors });
+    return Response.json({ errors });
   }
 
   // Send email via Amazon SES
   await ses.send(
     new SendEmailCommand({
       Destination: {
-        ToAddresses: [context.cloudflare.env.EMAIL],
+        ToAddresses: [process.env.EMAIL],
       },
       Message: {
         Body: {
@@ -85,12 +84,12 @@ export async function action({ context, request }) {
           Data: `Portfolio message from ${email}`,
         },
       },
-      Source: `Portfolio <${context.cloudflare.env.FROM_EMAIL}>`,
+      Source: `Portfolio <${process.env.FROM_EMAIL}>`,
       ReplyToAddresses: [email],
     })
   );
 
-  return json({ success: true });
+  return Response.json({ success: true });
 }
 
 export const Contact = () => {
