@@ -1,10 +1,27 @@
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
-import { renderToReadableStream } from 'react-dom/server';
+import ReactDOMServer from 'react-dom/server';
+
+const { renderToPipeableStream, renderToReadableStream } = ReactDOMServer;
 
 const ABORT_DELAY = 5000;
 
 export default async function handleRequest(
+  request,
+  responseStatusCode,
+  responseHeaders,
+  remixContext
+) {
+  if (typeof renderToReadableStream === 'function') {
+    return handleWebStreamRequest(request, responseStatusCode, responseHeaders, remixContext);
+  }
+
+  return isbot(request.headers.get('user-agent') || '')
+    ? handleBotRequest(request, responseStatusCode, responseHeaders, remixContext)
+    : handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext);
+}
+
+async function handleWebStreamRequest(
   request,
   responseStatusCode,
   responseHeaders,
@@ -29,5 +46,73 @@ export default async function handleRequest(
   return new Response(body, {
     headers: responseHeaders,
     status: responseStatusCode,
+  });
+}
+
+function handleBotRequest(request, responseStatusCode, responseHeaders, remixContext) {
+  return new Promise((resolve, reject) => {
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
+      {
+        onAllReady() {
+          const body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
+
+          responseHeaders.set('Content-Type', 'text/html');
+
+          resolve(
+            new Response(stream, {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            })
+          );
+
+          pipe(body);
+        },
+        onShellError(error) {
+          reject(error);
+        },
+        onError(error) {
+          responseStatusCode = 500;
+          console.error(error);
+        },
+      }
+    );
+
+    setTimeout(abort, ABORT_DELAY);
+  });
+}
+
+function handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext) {
+  return new Promise((resolve, reject) => {
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} abortDelay={ABORT_DELAY} />,
+      {
+        onShellReady() {
+          const body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
+
+          responseHeaders.set('Content-Type', 'text/html');
+
+          resolve(
+            new Response(stream, {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            })
+          );
+
+          pipe(body);
+        },
+        onShellError(error) {
+          reject(error);
+        },
+        onError(error) {
+          responseStatusCode = 500;
+          console.error(error);
+        },
+      }
+    );
+
+    setTimeout(abort, ABORT_DELAY);
   });
 }
