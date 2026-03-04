@@ -8,7 +8,7 @@ import rehypeImgSize from 'rehype-img-size';
 import rehypeSlug from 'rehype-slug';
 import rehypePrism from '@mapbox/rehype-prism';
 
-const vercelPreset = () => ({ name: 'vercelPreset' });
+import { vercelPreset } from '@vercel/remix/vite';
 
 export default defineConfig({
   assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.glsl'],
