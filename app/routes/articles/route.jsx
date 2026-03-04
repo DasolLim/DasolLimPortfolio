@@ -4,6 +4,7 @@ import { Post, postMarkdown } from '~/layouts/post';
 import { baseMeta } from '~/utils/meta';
 import config from '~/config.json';
 import { formatTimecode, readingTime } from '~/utils/timecode';
+import { json } from '@remix-run/node';
 
 export async function loader({ request }) {
   const slug = request.url.split('/').at(-1);
@@ -12,7 +13,7 @@ export async function loader({ request }) {
   const readTime = readingTime(text.default);
   const ogImage = `${config.url}/static/${slug}-og.jpg`;
 
-  return Response.json({
+  return json({
     ogImage,
     frontmatter: module.frontmatter,
     timecode: formatTimecode(readTime),

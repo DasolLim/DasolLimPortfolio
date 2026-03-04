@@ -16,6 +16,7 @@ import { baseMeta } from '~/utils/meta';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import styles from './contact.module.css';
+import { json } from '@remix-run/node';
 
 export const meta = () => {
   return baseMeta({
@@ -45,7 +46,7 @@ export async function action({ request }) {
   const errors = {};
 
   // Return without sending if a bot trips the honeypot
-  if (isBot) return Response.json({ success: true });
+  if (isBot) return json({ success: true });
 
   // Handle input validation on the server
   if (!email || !EMAIL_PATTERN.test(email)) {
@@ -65,7 +66,7 @@ export async function action({ request }) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return Response.json({ errors });
+    return json({ errors });
   }
 
   // Send email via Amazon SES
@@ -89,7 +90,7 @@ export async function action({ request }) {
     })
   );
 
-  return Response.json({ success: true });
+  return json({ success: true });
 }
 
 export const Contact = () => {

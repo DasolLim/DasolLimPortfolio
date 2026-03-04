@@ -1,3 +1,4 @@
+import { json } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -54,7 +55,7 @@ export const loader = async ({ request }) => {
 
   const theme = getThemeFromCookieHeader(request.headers.get('Cookie')) || 'dark';
 
-  return Response.json(
+  return json(
     { canonicalUrl, theme },
     {
       headers: {
